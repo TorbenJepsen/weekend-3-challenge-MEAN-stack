@@ -59,12 +59,13 @@ app.controller('TaskController', ['$http', function ($http) {
         $http({
             method: 'POST',
             url: '/task',
-            data: newTask = {task: self.newTask.task, 
+            data: newTask = {task: self.newTask.task,
             completed: false}
         })
             .then(function (response) {
                 console.log(response);
                 self.getTask();
+                self.newTask.task = '';
             });
 
 

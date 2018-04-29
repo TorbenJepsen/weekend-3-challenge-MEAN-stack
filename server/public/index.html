@@ -7,20 +7,26 @@
     <script src="vendors/angular.min.js"></script>
     <script src="scripts/client.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="styles/style.css">
+   
+    
     <title>MEAN Full Stack</title>
 </head>
 <body ng-app="TaskApp" ng-controller="TaskController as vm">
+    <div class="conatiner">
+        <div class="jumbotron">
         <h1>To Do List</h1>
-        <div>
-            <form>
+    </div>
+    </div>
+        <div class= "container">
+            <form class="form-group">
                 <label for="task">What </label>
-                <input ng-model="vm.newTask.task" placeholder="Enter Task"/>
+                <input class="form-control" ng-model="vm.newTask.task" placeholder="Enter Task"/>
                 <button ng-click="vm.addTask()">Submit New Task</button>
             </form>
         </div>
         <div>
-            <table>
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Task</th>
@@ -30,7 +36,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="task in vm.taskList">
+                    <tr ng-repeat="task in vm.taskList" ng-class="{ 'background-success': task.completed, 'background-incomplete': !task.completed}" >
                         <td>{{task.task}}
                         </td>
                         <td>{{task.completed}}
