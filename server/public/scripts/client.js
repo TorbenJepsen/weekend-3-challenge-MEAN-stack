@@ -10,7 +10,7 @@ app.controller('TaskController', ['$http', function ($http) {
     self.task = [{}];
     self.taskList = [];
     self.newTask = {};
- 
+
 
 
     self.getTask = function () {
@@ -21,7 +21,7 @@ app.controller('TaskController', ['$http', function ($http) {
             .then(function (response) {
                 console.log(response);
                 self.taskList = response.data;
-                
+
             })
             .catch(function (error) {
                 console.log('error on /task GET', error);
@@ -32,15 +32,17 @@ app.controller('TaskController', ['$http', function ($http) {
     self.getTask();
 
     self.deleteTask = function (task) {
-        $http({
-            method: 'DELETE',
-            url: '/task',
-            params: task
-        })
-        .then(function (response) {
-            self.getTask();
-        });
+        if (confirm("Are you sure you want to delete this task?")) {
 
+            $http({
+                method: 'DELETE',
+                url: '/task',
+                params: task
+            })
+                .then(function (response) {
+                    self.getTask();
+                });
+        }
     }
 
     self.completeTask = function (task) {
@@ -48,19 +50,21 @@ app.controller('TaskController', ['$http', function ($http) {
         $http({
             method: 'PUT',
             url: '/task',
-            data: task 
+            data: task
         })
-        .then(function (response) {
-            self.getTask();
-        });
+            .then(function (response) {
+                self.getTask();
+            });
     }
 
     self.addTask = function () {
         $http({
             method: 'POST',
             url: '/task',
-            data: newTask = {task: self.newTask.task,
-            completed: false}
+            data: newTask = {
+                task: self.newTask.task,
+                completed: false
+            }
         })
             .then(function (response) {
                 console.log(response);
