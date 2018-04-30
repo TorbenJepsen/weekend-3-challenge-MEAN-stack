@@ -6,7 +6,7 @@ const Task = require('../models/task.schema');
 const taskList = [];
 
 router.get('/', (req, res) => {
-  Task.find({})
+  Task.find({}).sort('completed')
   .then((dataFromDatabase) => {
       console.log('data from database', dataFromDatabase);
       res.send(dataFromDatabase);
