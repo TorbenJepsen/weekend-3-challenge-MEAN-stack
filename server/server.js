@@ -11,7 +11,7 @@ app.use(express.static('server/public'));
 
 app.use('/task', taskRouter);
 
-const databaseUrl = 'mongodb://localhost:27017/to_do_list';
+const databaseUrl = process.env.MONGODB_URI || 'mongodb://localhost:27017/to_do_list';
 mongoose.connect(databaseUrl);
 
 mongoose.connection.on('connected', () => {
